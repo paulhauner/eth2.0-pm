@@ -15,7 +15,7 @@ def get_eth1data_stub(state: BeaconState, current_epoch: Epoch) -> Eth1Data:
     epochs_per_period = SLOTS_PER_ETH1_VOTING_PERIOD // SLOTS_PER_EPOCH
     voting_period = current_epoch // epochs_per_period
     return Eth1Data(
-        deposit_root=hash(voting_period),
+        deposit_root=hash(int_to_bytes(voting_period, length=32)),
         deposit_count=state.eth1_deposit_index,
         block_hash=hash(hash(voting_period)),
     )
